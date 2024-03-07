@@ -12,7 +12,7 @@ index = None
 stored_docs = {}
 lock = Lock()
 
-index_name = "./saved_index"
+PERSIST_DIR = "./saved_index"
 pkl_name = "stored_documents.pkl"
 
 
@@ -20,13 +20,18 @@ def initialize_index():
     """Create a new global index, or load one from the pre-set path."""
     global index, stored_docs
     
-    service_context = ServiceContext.from_defaults(chunk_size_limit=512)
     with lock:
-        if os.path.exists(index_name):
-            index = load_index_from_storage(StorageContext.from_defaults(persist_dir=index_name), service_context=service_context)
+        # check if storage already exists
+        if not os.path.exists(PERSIST_DIR):
+            # load the documents and create the index
+            documents = SimpleDirectoryReader("data").load_data()
+            index = VectorStoreIndex.from_documents(documents)
+            # store it for later
+            index.storage_context.persist(persist_dir=PERSIST_DIR)
         else:
-            index = GPTVectorStoreIndex([], service_context=service_context)
-            index.storage_context.persist(persist_dir=index_name)
+            # load the existing index
+            storage_context = StorageContext.from_defaults(persist_dir=PERSIST_DIR)
+            index = load_index_from_storage(storage_context)
         if os.path.exists(pkl_name):
             with open(pkl_name, "rb") as f:
                 stored_docs = pickle.load(f)
@@ -51,7 +56,7 @@ def insert_into_index(doc_file_path, doc_id=None):
         stored_docs[document.doc_id] = document.text[0:200]  # only take the first 200 chars
 
         index.insert(document)
-        index.storage_context.persist(persist_dir=index_name)
+        index.storage_context.persist(persist_dir=PERSIST_DIR)
         
         with open(pkl_name, "wb") as f:
             pickle.dump(stored_docs, f)
