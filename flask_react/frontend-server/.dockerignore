@@ -1,2 +1,4 @@
+**/node_modules
+**/postman_examples
 **/Dockerfile
 **/docker-compose.yml

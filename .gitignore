@@ -7,3 +7,6 @@ node_modules
 build
 index.json
 stored_documents.pkl
+.DS_Store
+flask_react/.env
+flask_react/readme.md

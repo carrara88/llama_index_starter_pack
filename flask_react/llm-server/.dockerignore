@@ -1,0 +1,7 @@
+**/volumes
+**/node_modules
+**/postman_examples
+**/Dockerfile
+**/docker-compose.yml
+**/index.json
+**/stored_documents.pkl

@@ -1,0 +1,54 @@
+version: '3.8'
+services:
+  llm:
+    build:
+      context: ./llm-server
+      args:
+        - LLM_LOCAL_MODEL=${LLM_LOCAL_MODEL:-llama2}
+        - LLM_LOCAL_PORT=${LLM_LOCAL_PORT:-11434}
+    environment:
+      LLM_LOCAL_MODEL: ${LLM_LOCAL_MODEL:-llama2}
+      LLM_LOCAL_PORT: ${LLM_LOCAL_PORT:-11434}
+    env_file:
+      - ./.env
+    ports:
+      - "${LLM_LOCAL_PORT}:${LLM_LOCAL_PORT}"
+  index:
+    build:
+      context: ./index-server
+      args:
+        LLM_CLOUD_KEY: ${LLM_CLOUD_KEY}
+        INDEX_SERVER_PORT: ${INDEX_SERVER_PORT:-5602}
+        API_SERVER_PORT: ${API_SERVER_PORT:-5601}
+        LLM_LOCAL_PORT: ${LLM_LOCAL_PORT:-11434}
+    environment:
+      LLM_CLOUD_KEY: ${LLM_CLOUD_KEY}
+      LLM_LOCAL_PORT: ${LLM_LOCAL_PORT:-11434}
+      INDEX_SERVER_PORT: ${INDEX_SERVER_PORT:-5602}
+      API_SERVER_PORT: ${API_SERVER_PORT:-5601}
+    env_file:
+      - ./.env
+    depends_on:
+      - llm
+    ports:
+      - "${INDEX_SERVER_PORT}:${INDEX_SERVER_PORT}"
+      - "${API_SERVER_PORT}:${API_SERVER_PORT}"
+    volumes:
+      - ./shared-volumes/index-server/mnt:/app/mnt
+      - ./shared-volumes/index-server/index:/app/index
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+  frontend:
+    build: 
+      context: ./frontend-server
+    environment:
+      INDEX_SERVER_PORT: ${FRONTEND_SERVER_PORT:-3000}
+    env_file:
+      - ./.env
+    depends_on:
+      - index
+    ports:
+      - "${FRONTEND_SERVER_PORT}:${FRONTEND_SERVER_PORT}"
+    volumes:
+      - ./frontend-server/frontend/src:/app/frontend/src
+      - ./shared-volumes/frontend-server/build:/app/frontend/build      

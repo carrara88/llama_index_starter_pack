@@ -1,0 +1,17 @@
+{ 
+	/* celestial-sky */
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"workbench.colorCustomizations": {
+			"statusBar.background": "#c50087",
+			"titleBar.activeBackground": "#c50087",
+			"activityBarBadge.background": "#c50087",
+			"activityBar.activeBorder": "#c50087"
+		},
+		"window.titleBarStyle": "custom"
+	}
+}
