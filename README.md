@@ -45,10 +45,21 @@ There are two main example folders
 Each container folder contains a `Dockerfile`, root contain the `docker-compose.yml`.
 Remember to configure your root `.env` file with secrets an parameters required.
 
+![Docker Layers](flask_react/docker-composer-layers.png)
+
 #### Docker Compose
 You can run `docker composer build` inside `docker-composer.yml` folder to create docker images based on each Dockerfile container defined on yml.
 When images are ready, just run `docker compose up` to run your containers all togheter.
 
+![Docker Stack](flask_react/docker-composer-stack.png)
+
+#### Useful docker commands
+- docker composer build
+- docker composer build --no-cache
+- docker compose up
+- docker compose up --remove-orphans
+- docker system prune
+- docker system prune -a
 
 ### Environment
 Some parameters an configuration can be included into an `.env` file like:

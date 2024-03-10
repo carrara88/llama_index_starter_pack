@@ -1,0 +1,122 @@
+{
+	"info": {
+		"_postman_id": "53a5ffb7-2fc6-4307-829e-78d72dee243a",
+		"name": "index_api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22051528"
+	},
+	"item": [
+		{
+			"name": "localhost:5601/login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "username1",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "password1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:5601/login",
+					"host": [
+						"localhost"
+					],
+					"port": "5601",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:5601/secure",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTAxMjk3MDYsImlhdCI6MTcxMDA0MzMwMSwic3ViIjoidXNlcm5hbWUxIiwicm9sZSI6InVzZXIiLCJpbmRleF9pZCI6IjAifQ.dL4ramI-HlQv20LA-w_mDCplNo67RASqT_lfJT5Tut0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "username1",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "password1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:5601/secure",
+					"host": [
+						"localhost"
+					],
+					"port": "5601",
+					"path": [
+						"secure"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:5601/query_index",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:5601/query_index",
+					"host": [
+						"localhost"
+					],
+					"port": "5601",
+					"path": [
+						"query_index"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:5601/insert_document",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:5601/insert_document",
+					"host": [
+						"localhost"
+					],
+					"port": "5601",
+					"path": [
+						"insert_document"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
