@@ -23,8 +23,8 @@ pip install -r requirements.txt
 ## flask_react
 There are two main example folders
 - flask_react (runs 4 services on localhost:5601/5602/3000/11434)
-  - `docker composer build`
-  - `docker composer up`
+  - `docker compose build`
+  - `docker compose up`
   - creates a simple api (`index-server:5601`) that loads the text from the documents folder (if any), also launches the react frontend (`frontend-server:3000`)
   - index-server (container)
     - supervisord is configured on `supervisord.conf` to run python script as system services on container at startup
@@ -54,8 +54,8 @@ When images are ready, just run `docker compose up` to run your containers all t
 ![Docker Stack](flask_react/docker-composer-stack.png)
 
 #### Useful docker commands
-- docker composer build
-- docker composer build --no-cache
+- docker compose build
+- docker compose build --no-cache
 - docker compose up
 - docker compose up --remove-orphans
 - docker system prune
