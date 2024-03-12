@@ -5,3 +5,5 @@ llama-index==0.10.18
 Werkzeug==3.0.1
 transformers
 llama-index-readers-file
+llama-index-embeddings-huggingface
+supervisor

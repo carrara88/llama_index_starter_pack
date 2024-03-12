@@ -60,8 +60,6 @@ ENV LLM_CLOUD_EMBEDDING_MODEL=${LLM_CLOUD_EMBEDDING_MODEL}
 
 WORKDIR /app
 
-# setup llama-index-embeddings (huggingface)
-RUN pip install --no-cache-dir llama-index-embeddings-huggingface
 # os setup
 RUN apt-get update && apt-get install -y \
     netcat-openbsd \
@@ -82,7 +80,6 @@ COPY ./index.py ./index.py
 COPY ./launch_app.sh ./launch_app.sh
 
 # supervisor
-RUN pip install supervisor
 RUN mkdir -p /etc/supervisor/conf.d
 COPY wait-for-port.sh /usr/local/bin/wait-for-port.sh
 RUN chmod +x /usr/local/bin/wait-for-port.sh

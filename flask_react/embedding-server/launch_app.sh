@@ -2,4 +2,4 @@
 
 echo "Embedding server starting..."
 # start embedding
-python embedding.py &
+supervisord -c /etc/supervisor/supervisord.conf

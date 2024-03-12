@@ -8,4 +8,6 @@ llama-index-readers-file
 llama-index-llms-ollama
 llama-index-llms-groq
 InstructorEmbedding
+supervisor
 pyjwt
+llama-index-embeddings-huggingface
